@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Tasks</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: right;
+        }
+
+        button[type="submit"] {
+            background-color: #ff7f0e;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-right: 100px;
+            margin-top: 15px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #ff6b00;
+        }
+
+        main {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <!-- Кнопка для создания задачи -->
+        <form action="{% url 'create_task' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Create Task</button>
+        </form>
+    </header>
+
+   <main>
+    <h1>All Tasks</h1>
+        <ul>
+        {% for task in tasks %}
+            <li>{{ task.title }}</li>
+            <!-- Добавьте другие атрибуты задачи, которые вы хотите отобразить -->
+        {% endfor %}
+        </ul>
+    </main>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Страница доски</title>
+</head>
+<body>
+    <header>
+        <h1>Доска {{ Boards.name }}</h1>
+    </header>
+
+    <main>
+        <!-- Контент страницы доски -->
+        <h2>Создать новую тему</h2>
+        <form method="POST" action="{% url 'create_thread' Boards.id %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Создать тему</button>
+        </form>
+    </main>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная страница</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #007bff;
+            padding: 20px;
+            color: #fff;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        header a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 20px;
+            transition: color 0.3s ease;
+        }
+        header a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+        main {
+            padding: 20px;
+        }
+        footer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+        }
+        .orange-button {
+            background-color: #7bd389; /* Светло-зелёный цвет */
+            border: none;
+            color: white;
+            padding: 12px 24px; /* Увеличим отступы для лучшего внешнего вида */
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 25px; /* Более скруглённые углы */
+            cursor: pointer;
+            transition: background-color 0.3s; /* Добавим плавный переход при наведении */
+        }
+
+        /* Изменим цвет кнопки при наведении */
+        .orange-button:hover {
+            background-color: #5cb67d; /* Цвет при наведении */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <!-- 4 основные кнопки -->
+        <a href="{% url 'index_posts' %}">Все посты</a>
+        <a href="{% url 'index_users' %}">Список пользователей</a>
+        <a href="{% url 'profile' %}">Профиль</a>
+        <a href="{% url 'login' %}" class="orange-button">Авторизация</a>
+    </header>
+
+    <main>
+        <!-- Контент главной страницы -->
+        <h1>Добро пожаловать на главную страницу</h1>
+        <p>Здесь может быть ваш контент</p>
+    </main>
+
+    <footer>
+        &copy; 2024 Все права защищены.
+    </footer>
+</body>
+</html>

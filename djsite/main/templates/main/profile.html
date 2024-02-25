@@ -1,0 +1,25 @@
+<!-- profile.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль пользователя</title>
+</head>
+<body>
+    <header>
+        <h1>Профиль пользователя: {{ user.username }}</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ avatar_form }}
+            <button type="submit">Загрузить фото</button>
+        </form>
+        <a href="{% url 'logout' %}">Выйти</a>
+        <a href="{% url 'password_change' %}">Сменить пароль</a>
+    </header>
+
+    <main>
+        <!-- Дополнительный контент вашего профиля -->
+    </main>
+</body>
+</html>

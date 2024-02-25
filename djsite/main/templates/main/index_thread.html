@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Страница темы</title>
+</head>
+<body>
+    <header>
+        <h1>Тема: {{ thread.title }}</h1>
+    </header>
+
+    <main>
+        <!-- Контент страницы темы -->
+        <article>
+            <h2>{{ thread.title }}</h2>
+            <p>{{ thread.content }}</p>
+            <p>Автор: {{ thread.author.username }}</p>
+            <p>Дата создания: {{ thread.created_at }}</p>
+        </article>
+
+        <section>
+            <h2>Добавить комментарий</h2>
+            <form method="POST" action="{% url 'add_comment' thread.id %}">
+                {% csrf_token %}
+                <label for="comment">Комментарий:</label><br>
+                <textarea id="comment" name="comment" rows="4" cols="50"></textarea><br>
+                <button type="submit">Отправить</button>
+            </form>
+        </section>
+
+        <section>
+            <h2>Комментарии</h2>
+            {% for comment in thread.comments.all %}
+            <div class="comment">
+                <p>{{ comment.content }}</p>
+                <p>Автор: {{ comment.author.username }}</p>
+                <p>Дата создания: {{ comment.created_at }}</p>
+            </div>
+            {% empty %}
+            <p>Пока нет комментариев.</p>
+            {% endfor %}
+        </section>
+    </main>
+</body>
+</html>
