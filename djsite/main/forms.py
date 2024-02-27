@@ -3,8 +3,7 @@ from django import forms
 import re
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
-from .models import Profile
-from django.contrib.auth import get_user_model
+from .models import Profile, Task, Chat
 
 
 class RegistrationForm(forms.Form):
@@ -94,6 +93,11 @@ class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = ['title', 'description', 'due_date', 'attached_file']
+
+class ChatForm(forms.ModelForm):
+    class Meta:
+        model = Chat
+        fields = ['message']
 
 class AvatarUploadForm(forms.ModelForm):
     class Meta:

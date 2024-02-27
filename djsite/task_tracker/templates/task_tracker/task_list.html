@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>All Tasks</h1>
+    <ul>
+        {% for task in tasks %}
+            <li>{{ task.title }}</li>
+            <!-- Здесь можете добавить другие поля задачи, которые хотите отображать -->
+        {% endfor %}
+    </ul>
+{% endblock %}

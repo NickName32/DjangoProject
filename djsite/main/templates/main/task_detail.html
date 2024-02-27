@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task Detail</title>
+</head>
+<body>
+    <h2>{{ task.title }}</h2>
+    <p>{{ task.description }}</p>
+    <h3>Chat</h3>
+    {% for chat in chats %}
+        <p>{{ chat.sender.username }}: {{ chat.message }}</p>
+    {% endfor %}
+
+    <!-- Отображение списка задач -->
+    <h3>Tasks</h3>
+    <ul>
+        {% for subtask in task.subtasks.all %}
+            <li>{{ subtask.title }}</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Форма для отправки сообщения в чат -->
+    <form method="post">
+        {% csrf_token %}
+        {{ chat_form.as_p }}
+        <button type="submit">Send</button>
+    </form>
+</body>
+</html>

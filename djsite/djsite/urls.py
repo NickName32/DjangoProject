@@ -20,4 +20,6 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
+    #path('tasks/', include('task_tracker.urls')),
+    path('index_posts/', include('task_tracker.urls')),
 ]

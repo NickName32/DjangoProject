@@ -1,0 +1,29 @@
+<!-- create_task.html -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'task_tracker/css/task_tracker.css' %}">
+    <title>Create Task</title>
+</head>
+<body>
+      <div class="container">
+        <h1>Создать задачу</h1>
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="id_title">Название задачи:</label>
+        <input type="text" id="id_title" name="title">
+        <label for="id_description">Описание задачи:</label>
+        <textarea id="id_description" name="description"></textarea>
+        <label for="id_due_date">Дата завершения:</label>
+        <input type="date" id="id_due_date" name="due_date">
+        <label for="id_task_file">Прикрепить файл:</label>
+        <input type="file" id="id_task_file" name="task_file">
+        <button type="submit">Create Task</button>
+    </form>
+    </div>
+</body>
+</html>
