@@ -9,7 +9,9 @@ from .forms import ProfileUpdateForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
-
+from django.contrib.auth.views import LoginView
+from django.shortcuts import render
+from .models import Thread
 
 # Create your views here.
 def index(request):
@@ -135,9 +137,30 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('profile')  # Перенаправление на профиль после успешной аутентификации
-    return render(request, 'main/login.html')
+            return redirect('profile')
+        else:
+            error_message = "Неверные имя пользователя или пароль."
+            messages.error(request, error_message)  # Добавляем сообщение об ошибке
+            return render(request, 'main/login.html')
+    else:
+        return render(request, 'main/login.html')
 
 @login_required
 def profile(request):
     return render(request, 'main/profile.html')
+
+
+class CustomLoginView(LoginView):
+    template_name = 'main/login.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['threads'] = Thread.objects.all().order_by("Time_Created")[:10]
+        return context
+
+
+def custom_login(request, *args, **kwargs):
+    context = {
+        'threads': Thread.objects.all().order_by("Time_Created")[:10]
+    }
+    return LoginView.as_view(template_name='main/login.html', extra_context=context)(request, *args, **kwargs)

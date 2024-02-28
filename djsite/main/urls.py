@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 from .models import Thread
 from django.contrib.auth import views as auth_views
+from .views import CustomLoginView
 
 
 urlpatterns = [
@@ -15,9 +16,10 @@ urlpatterns = [
     path('members_list/', views.index_users, name = "index_users"),
     path('register/', views.register, name = "register"),
     #path('login/', auth_views.LoginView.as_view(), name='login'),
-    path('login/', auth_views.LoginView.as_view(template_name="main/login.html", extra_context={
-       'Threads': Thread.objects.all().order_by("Time_Created")[:10]}),
-        name = "login"),
+    path('login/', CustomLoginView.as_view(), name="login"),
+    #path('login/', auth_views.LoginView.as_view(template_name="main/login.html", extra_context={
+    #   'Threads': Thread.objects.all().order_by("Time_Created")[:10]}),
+     #   name = "login"),
     path('logout/', auth_views.LogoutView.as_view(next_page="/", extra_context={
         'Threads': Thread.objects.all().order_by("Time_Created")[:10]}),
          name="logout"),
